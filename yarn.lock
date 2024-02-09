@@ -1547,6 +1547,11 @@
   dependencies:
     "@hapi/hoek" "^9.0.0"
 
+"@intercom/intercom-react-native@^6.4.0":
+  version "6.4.0"
+  resolved "https://registry.yarnpkg.com/@intercom/intercom-react-native/-/intercom-react-native-6.4.0.tgz#460408a6fd6450fd3e87a3d4021d78137240c931"
+  integrity sha512-gBWKZRLvSOeL9wGJZg7UBPVQYIUwN8WNACKnIIUEww7TEtwbVfBMtTJ21vyDBBoAtEp6pwvPg6J/Gc3xsREzDA==
+
 "@isaacs/ttlcache@^1.4.1":
   version "1.4.1"
   resolved "https://registry.yarnpkg.com/@isaacs/ttlcache/-/ttlcache-1.4.1.tgz#21fb23db34e9b6220c6ba023a0118a2dd3461ea2"

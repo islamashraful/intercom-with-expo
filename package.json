@@ -9,6 +9,7 @@
     "web": "expo start --web"
   },
   "dependencies": {
+    "@intercom/intercom-react-native": "^6.4.0",
     "expo": "~50.0.6",
     "expo-status-bar": "~1.11.1",
     "react": "18.2.0",
