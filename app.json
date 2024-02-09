@@ -11,9 +11,7 @@
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["**/*"],
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "com.islmash.intercom"
@@ -31,7 +29,13 @@
     "extra": {
       "eas": {
         "projectId": "2ac8b1b7-b717-45a5-b0a7-ac7c12d20856"
+      },
+      "INTERCOM": {
+        "androidApiKey": "android_sdk-YOUR-KEY",
+        "appId": "YOUR_APP_ID",
+        "iosApiKey": "ios_YOUR_KEY"
       }
-    }
+    },
+    "plugins": ["./plugins/intercom-config-plugin.js"]
   }
 }
