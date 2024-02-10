@@ -76,8 +76,9 @@ npx expo start --dev-client
         "appId": "YOUR_APP_ID",
         "iosApiKey": "ios_YOUR_KEY"
     }
-    ...
-}
+},
+"plugins": ["./plugins/intercom-config-plugin.js"],
+....
 ```
 
 3. Update your application code to see Intercom actions, like `App.js` from this repo
