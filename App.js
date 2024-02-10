@@ -1,10 +1,21 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { StatusBar } from "expo-status-bar";
+import { useEffect } from "react";
+import { StyleSheet, Button, View } from "react-native";
+import Intercom from "@intercom/intercom-react-native";
 
 export default function App() {
+  useEffect(() => {
+    Intercom.loginUnidentifiedUser();
+  }, []);
+
   return (
     <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
+      <Button
+        title="Open Intercom"
+        onPress={() => {
+          Intercom.present();
+        }}
+      />
       <StatusBar style="auto" />
     </View>
   );
@@ -13,8 +24,8 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    backgroundColor: "#fff",
+    alignItems: "center",
+    justifyContent: "center",
   },
 });
