@@ -60,7 +60,7 @@ const withMainApplicationIntercomInit = (expoConfig) =>
 const withAppDelegateIntercomImport = (expoConfig) =>
   withAppDelegate(expoConfig, (modConfig) => {
     const contents = modConfig.modResults.contents;
-    const match = contents.indexOf(`import <IntercomModule.h>`);
+    const match = contents.indexOf(`#import <IntercomModule.h>`);
     if (match > -1) {
       return modConfig;
     }
