@@ -22,7 +22,7 @@ cd intercom-with-expo
 Install the project dependencies using yarn:
 
 ```bash
-yarn
+bun install
 ```
 
 **Set Up App Configuration**
@@ -60,7 +60,7 @@ eas build --profile development --platform android --local
 Open the android or ios build in the respective simulator and run following command.
 
 ```bash
-npx expo start --dev-client
+bunx expo start --dev-client
 ```
 
 ## <a name="quick-start">🤸 Using Intercom Config Plugin in Your Own App (Preferred Way!)</a>
@@ -109,12 +109,14 @@ useEffect(() => {
 
 ```js
 const {
-  withMainApplication,
   withPlugins,
+  withMainApplication,
   withAppDelegate,
+  withInfoPlist,
 } = require("@expo/config-plugins");
 
 // Import intercom, insert following code on MainApplication.kt
+// import com.intercom.reactnative.IntercomModule
 const withMainApplicationIntercomImport = (expoConfig) =>
   withMainApplication(expoConfig, (modConfig) => {
     const contents = modConfig.modResults.contents;
@@ -151,7 +153,7 @@ const withMainApplicationIntercomInit = (expoConfig) =>
       return modConfig;
     }
 
-    const soLoaderCode = `SoLoader.init(this, false)`;
+    const soLoaderCode = `SoLoader.init(this, OpenSourceMergedSoMapping)`;
     const startIndexForSoLoader = contents.indexOf(soLoaderCode);
     if (startIndexForSoLoader < 0) {
       return modConfig;
@@ -170,7 +172,7 @@ const withMainApplicationIntercomInit = (expoConfig) =>
 const withAppDelegateIntercomImport = (expoConfig) =>
   withAppDelegate(expoConfig, (modConfig) => {
     const contents = modConfig.modResults.contents;
-    const match = contents.indexOf(`import <IntercomModule.h>`);
+    const match = contents.indexOf(`#import <IntercomModule.h>`);
     if (match > -1) {
       return modConfig;
     }
@@ -219,12 +221,26 @@ const withAppDelegateIntercomInit = (expoConfig) =>
     return modConfig;
   });
 
+// Add camera usage permission to Info.plist
+const withInfoPlistCameraPermission = (expoConfig) =>
+  withInfoPlist(expoConfig, (modConfig) => {
+    if (modConfig.ios.infoPlist.NSCameraUsageDescription) {
+      return modConfig;
+    }
+
+    modConfig.ios.infoPlist["NSCameraUsageDescription"] =
+      "Access your camera to take photos within a conversation";
+
+    return modConfig;
+  });
+
 module.exports = (expoConfig) => {
   return withPlugins(expoConfig, [
     [withMainApplicationIntercomImport],
     [withMainApplicationIntercomInit],
     [withAppDelegateIntercomImport],
     [withAppDelegateIntercomInit],
+    [withInfoPlistCameraPermission],
   ]);
 };
 ```
